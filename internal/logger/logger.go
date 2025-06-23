@@ -9,7 +9,7 @@ import (
 const tsKey = "timestamp"
 const msKey = "message"
 
-func NewLogger(level string) (*zap.Logger, error) {
+func NewLogger(level string) (*zap.SugaredLogger, error) {
 	logLevel, err := zap.ParseAtomicLevel(level)
 	if err != nil {
 		return nil, errors.Wrapf(err, "error ParseAtomicLevel %s", level)
@@ -28,5 +28,5 @@ func NewLogger(level string) (*zap.Logger, error) {
 	if err != nil {
 		return nil, errors.Wrap(err, "error logger config build")
 	}
-	return logger, nil
+	return logger.Sugar(), nil
 }
